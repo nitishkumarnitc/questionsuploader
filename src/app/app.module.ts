@@ -5,10 +5,12 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {MaterialModule} from "@angular/material";
+import { AddQuestionComponent } from './add-question/add-question.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AddQuestionComponent
   ],
   imports: [
     BrowserModule,
