@@ -7,8 +7,7 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class AddQuestionComponent implements OnInit {
 
-  @Input()
-  questionPortion:String;
+  @Input() questionPortion:String;
 
   constructor() { }
 

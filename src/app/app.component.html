@@ -1,18 +1,20 @@
 <div class="row">
-    <div class="col-md-2">
-  <h4>Select Chapters</h4>
-  <ul class="heroes">
-    <li *ngFor="let chapter of chapters"
-        [class.selected]="chapter === selectedChapter"
-        (click)="onSelect(chapter)">
-      <span class="badge">{{chapter.chapterId}}</span> {{chapter.chapterName}}
-    </li>
-  </ul>
-  </div>
+    <!--<div class="col-4">-->
+  <!--<h4>Select Chapters</h4>-->
+  <!--<ul class="heroes">-->
+    <!--<li *ngFor="let chapter of chapters"-->
+        <!--[class.selected]="chapter === selectedChapter"-->
+        <!--(click)="onSelect(chapter)">-->
+      <!--<span class="badge">{{chapter.chapterId}}</span> {{chapter.chapterName}}-->
+    <!--</li>-->
+  <!--</ul>-->
+  <!--</div>-->
 
-  <div class="offset-2" *ngIf="selectedChapter">
+  <!--<div class="col-12" *ngIf="selectedChapter">-->
+  <div class="col-12">
+    <h3>Add Question</h3>
     <div class="row">
-        <app-add-question [questionPortion]="question"></app-add-question>
+        <app-add-question [questionPortion]="statement"></app-add-question>
     </div>
     <div class="row">
       <app-add-question [questionPortion]="option1"></app-add-question>
@@ -30,4 +32,5 @@
       <app-add-question [questionPortion]="solution"></app-add-question>
     </div>
   </div>
+
 </div>
