@@ -1,25 +1,42 @@
-<form class="example-form">
-
-
-    <md-input-container class="example-full-width">
-      <textarea md-input placeholder="Enter text/imageUrl/equation">
-
-      </textarea>
-    </md-input-container>
-
-
-
-    <md-input-container>
-      <md-radio-group class="example-radio-group" [(ngModel)]="favoriteSeason">
-        <md-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
-          {{season}}
+<div>
+      <md-radio-group class="example-radio-group col-4 " [(ngModel)]="selectedRadioButton">
+        <md-radio-button class="example-radio-button" *ngFor="let textType of textTypes" [value]="textType">
+          {{textType}}
         </md-radio-button>
+        <div class="example-selected-value">Selected Type is : {{selectedRadioButton}}</div>
       </md-radio-group>
-      <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div>
-
-    </md-input-container>
 
 
+      <md-input-container>
+        <textarea md-input placeholder="text" [(ngModel)]="atom.text"></textarea>
 
 
-</form>
+      </md-input-container>
+
+  <input type="file"
+         ngFileSelect
+         [options]="options"
+         (onUpload)="handleUpload($event)"
+         (beforeUpload)="beforeUpload($event)">
+
+  <!-- drag & drop file example-->
+  <style>
+    .file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+  </style>
+  <div ngFileDrop
+       [options]="options"
+       (onUpload)="handleUpload($event)"
+       [ngClass]="{'file-over': hasBaseDropZoneOver}"
+       (onFileOver)="fileOverBase($event)"
+       (beforeUpload)="beforeUpload($event)">
+  </div>
+
+  <div>
+    Response: {{ uploadFile | json }}
+  </div>
+
+  <button md-fab color="primary"><md-icon>add</md-icon></button>
+  <button md-fab color="secondary"><md-icon>check</md-icon></button>
+
+
+</div>

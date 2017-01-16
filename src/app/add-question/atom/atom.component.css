@@ -1,5 +1,5 @@
 .example-radio-group {
-  display: inline-flex;
+  display: inline;
   flex-direction: column;
 }
 
@@ -9,12 +9,4 @@
 
 .example-selected-value {
   margin: 15px 0;
-}
-
-.example-form {
-  width: 500px;
-}
-
-.example-full-width {
-  width: 50%;
 }
