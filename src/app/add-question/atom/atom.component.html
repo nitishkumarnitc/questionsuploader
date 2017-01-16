@@ -1,42 +1,48 @@
-<div>
-      <md-radio-group class="example-radio-group col-4 " [(ngModel)]="selectedRadioButton">
+<div class="container">
+<div class="row">
+
+  <div class="col-4">
+
+      <md-radio-group class="example-radio-group " [(ngModel)]="selectedRadioButton">
         <md-radio-button class="example-radio-button" *ngFor="let textType of textTypes" [value]="textType">
           {{textType}}
         </md-radio-button>
         <div class="example-selected-value">Selected Type is : {{selectedRadioButton}}</div>
       </md-radio-group>
+  </div>
+
+  <div class="col-4">
+    <textarea *ngIf="selectedRadioButton!='isImage'"md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
+    <input  *ngIf="selectedRadioButton=='isImage'" type="file"
+           ngFileSelect
+           [options]="options"
+           (onUpload)="handleUpload($event)"
+           (beforeUpload)="beforeUpload($event)">
 
 
-      <md-input-container>
-        <textarea md-input placeholder="text" [(ngModel)]="atom.text"></textarea>
-
-
-      </md-input-container>
-
-  <input type="file"
-         ngFileSelect
+    <div ngFileDrop
          [options]="options"
          (onUpload)="handleUpload($event)"
+         [ngClass]="{'file-over': hasBaseDropZoneOver}"
+         (onFileOver)="fileOverBase($event)"
          (beforeUpload)="beforeUpload($event)">
+    </div>
 
-  <!-- drag & drop file example-->
-  <style>
-    .file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
-  </style>
-  <div ngFileDrop
-       [options]="options"
-       (onUpload)="handleUpload($event)"
-       [ngClass]="{'file-over': hasBaseDropZoneOver}"
-       (onFileOver)="fileOverBase($event)"
-       (beforeUpload)="beforeUpload($event)">
+    <div>
+      Response: {{ uploadFile | json }}
+    </div>
   </div>
 
-  <div>
-    Response: {{ uploadFile | json }}
+  <div class="col-4">
+
+    <button md-fab>
+      <md-icon class="md-24">add</md-icon>
+    </button>
+
+    <button md-raised-button color="warn"><md-icon>done</md-icon></button>
   </div>
 
-  <button md-fab color="primary"><md-icon>add</md-icon></button>
-  <button md-fab color="secondary"><md-icon>check</md-icon></button>
 
 
+</div>
 </div>

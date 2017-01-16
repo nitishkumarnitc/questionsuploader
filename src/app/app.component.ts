@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
 
   private chapters:Chapter[];
   private errorMessage: String;
-  private question="Question";
+  private statement="Statement";
   private option1="Option1";
   private option2="Option2";
   private option3="Option3";

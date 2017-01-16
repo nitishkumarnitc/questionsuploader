@@ -1,5 +1,5 @@
 .example-radio-group {
-  display: inline;
+  display: inline-flex;
   flex-direction: column;
 }
 
@@ -10,3 +10,5 @@
 .example-selected-value {
   margin: 15px 0;
 }
+
+.file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */

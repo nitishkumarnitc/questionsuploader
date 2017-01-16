@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Atom} from "./atom";
+import {Atom} from "../../atom";
 
 
 @Component({
@@ -11,20 +11,43 @@ import {Atom} from "./atom";
 export class AtomComponent implements OnInit {
   selectedRadioButton: string;
 
+
+  atom:Atom;
+  atomArray:Array<Atom>;
+
+
+  onClickPlus(){
+    if(this.selectedRadioButton=='isImage'){
+      let tempAtom=new Atom(this.uploadFile,true,false);
+      this.atomArray.push(tempAtom);
+    }else if(this.selectedRadioButton=='isEquation'){
+      let tempAtom=new Atom(this.atom.text,false,true);
+      this.atomArray.push(tempAtom);
+    }else{
+      let tempAtom=new Atom(this.atom.text,false,false);
+      this.atomArray.push(tempAtom);
+    }
+  }
+
+
   textTypes = [
     'isImage',
     'isEquation',
     'isSimpleText'
   ];
 
+
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  atom:Atom;
+;
 
   uploadFile: any;
+
+
   hasBaseDropZoneOver: boolean = false;
   options: Object = {
     url: 'http://www.mistu.org/etutor/upload'
@@ -48,5 +71,8 @@ export class AtomComponent implements OnInit {
       alert('File is too large');
     }
   }
+
+
+
 
 }
