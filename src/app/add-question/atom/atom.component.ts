@@ -15,7 +15,7 @@ export class AtomComponent implements OnInit {
 
   selectedRadioButton: string;
   selectedText:string;
-  atomsArray:Atom[]=[];
+  atomsArray:Atom[]=[];;;;;
   onClickPlus(){
          if(this.selectedRadioButton=='isImage'){
            console.log("Inside image");
