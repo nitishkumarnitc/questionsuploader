@@ -69,7 +69,7 @@ export class AtomComponent implements OnInit {
 
   hasBaseDropZoneOver: boolean = false;
   options: Object = {
-    url: 'http://www.mistu.org/etutor/uploadimages.php/'
+    url: 'https://www.mistu.org/etutor/uploadimages.php/'
   };
   sizeLimit = 2000000;
 
