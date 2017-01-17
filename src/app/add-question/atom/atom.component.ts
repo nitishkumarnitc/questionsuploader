@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AtomClient} from "./atom-client";
+import {Atom} from "./atom";
+
 
 
 @Component({
@@ -14,48 +15,32 @@ export class AtomComponent implements OnInit {
 
   selectedRadioButton: string;
   selectedText:string;
-  atomClient:AtomClient;
-  // atomClientsArray:Array<AtomClient>;
-  atomClientsArray:AtomClient[]=[];
+  atomsArray:Atom[]=[];
   onClickPlus(){
+         if(this.selectedRadioButton=='isImage'){
+           console.log("Inside image");
+           let atom=new Atom(this.uploadFile['originalName'],this.selectedRadioButton);
 
-          console.log("pushing object to clientAtomArray");
-          let tempAtom=new AtomClient("Nitish","Image");
-         console.log("Value of object to be pushed is "+tempAtom.selectedType+tempAtom.text);
-         this.atomClientsArray.push(tempAtom);;
+           this.atomsArray.push(atom);
+           this.selectedText=null;
+           this.selectedRadioButton=null;
+           this.printAtomClientsArray();
 
-         // this.atomClientsArray.push(new AtomClient("Nitish","Image"));
-          console.log("Array size is"+String(this.atomClientsArray.length));
-         //
-         // //console.log("onClickPlus called "+JSON.stringify(this.uploadFile['originalName'])+this.selectedRadioButton);
-         // console.log("onClickPlus called "+this.uploadFile['originalName']+this.selectedRadioButton);
-         //
-         // if(this.selectedRadioButton=='isImage'){
-         //   console.log("Inside image");
-         //   let atomClientTemp=new AtomClient(this.uploadFile['originalName'],this.selectedRadioButton);
-         //   console.log("atom client created"  + atomClientTemp.text  + atomClientTemp.selectedType);
-         //   this.atomClientsArray.push(atomClientTemp);
-         //   //this.printAtomClientsArray();
-         //
-         //   // console.log("Inside printClients Array, Size is :" + String(this.atomClientsArray.length));
-         //   console.log("Inside printClients Array, Size is :");
-         //
-         //
-         //   for(let atomClient of this.atomClientsArray){
-         //     console.log("Printing clients array"+atomClient);
-         //   }
-         //   //console.log("Printing atomClientsArray:" + "Type:"+this.atomClientsArray[0].selectedType + "Text:"+this.atomClientsArray[0].text);
-         // }else{
-         //    let atomClientTemp=new AtomClient(this.selectedText,this.selectedRadioButton);
-         //    this.atomClientsArray.push(atomClientTemp);
-         //   //console.log("Printing atomClientsArray:" + "Type:"+this.atomClientsArray[0].selectedType + "Text:"+this.atomClientsArray[0].text);
-         // }
+         }else{
+           console.log("Inside image or euation");
+            let atom=new Atom(this.selectedText,this.selectedRadioButton);
+           this.atomsArray.push(atom);
+           this.selectedText=null;
+           this.selectedRadioButton=null;
+           this.printAtomClientsArray();
+
+         }
   }
 
   printAtomClientsArray(){
-    console.log("Inside printClients Array"+"Size is"+ this.atomClientsArray.length);
-    for(let atomClient of this.atomClientsArray){
-        console.log("Printing clients array"+atomClient);
+    console.log("Inside printClients Array"+"Size is"+ this.atomsArray.length);
+    for(let atom in this.atomsArray){
+        console.log("Printing clients array"+atom);
     }
   }
 

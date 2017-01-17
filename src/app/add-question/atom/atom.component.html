@@ -1,21 +1,21 @@
 <div class="container">
 
 
-  <div class="row" *ngFor="let atomClient of atomClientsArray">
+  <div class="row" *ngFor="let atom of atomsArray">
 
     <div class="col-6">
 
-      <md-radio-group class="example-radio-group " [(ngModel)]="atomClient.selectedType">
+      <md-radio-group class="example-radio-group " [(ngModel)]="atom.selectedType">
         <md-radio-button class="example-radio-button" *ngFor="let textType of textTypes" [value]="textType">
           {{textType}}
         </md-radio-button>
-        <div class="example-selected-value">Selected Type is : {{atomClient.selectedType}}</div>
+        <div class="example-selected-value">Selected Type is : {{atom.selectedType}}</div>
       </md-radio-group>
     </div>
 
     <div class="col-6">
-      <textarea *ngIf="atomClient.selectedType!='isImage'"md-input placeholder="text" [(ngModel)]="atomClient.text" ></textarea>
-      <input  *ngIf="atomClient.selectedType=='isImage'" type="file"
+      <textarea *ngIf="atom.selectedType!='isImage'"md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
+      <input  *ngIf="atom.selectedType=='isImage'" type="file"
               ngFileSelect
               [options]="options"
               (onUpload)="handleUpload($event)"
@@ -31,7 +31,7 @@
       </div>
 
       <div>
-        Response: {{ atomClient.text | json }}
+        Response: {{ atom.text | json }}
       </div>
     </div>
 
