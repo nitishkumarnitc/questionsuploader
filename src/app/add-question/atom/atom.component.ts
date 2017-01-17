@@ -1,7 +1,7 @@
+/*Basic simple form*/
+
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Atom} from "./atom";
-
-
 
 @Component({
   selector: 'app-atom',
@@ -10,13 +10,30 @@ import {Atom} from "./atom";
 
 })
 export class AtomComponent implements OnInit {
-
-
   @Output() portionAdded=new EventEmitter<Atom[]>();
   selectedRadioButton: string;
   selectedText:string;
   atomsArray:Atom[]=[];
   doneWithThisPortion:boolean=false;
+
+  textTypes = [
+    'isImage',
+    'isEquation',
+    'isSimpleText'
+  ];
+
+  uploadFile: any;
+  hasBaseDropZoneOver: boolean = false;
+  options: Object = {
+    url: 'http://localhost:10050/upload'
+  };
+  sizeLimit = 2000000;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
   onClickPlus(){
          if(this.selectedRadioButton=='isImage'){
            console.log("Inside image");
@@ -49,29 +66,6 @@ export class AtomComponent implements OnInit {
         console.log("Printing clients array"+ "Text "+atom.text +"selectedType"+atom.selectedType);
     }
   }
-
-
-  textTypes = [
-    'isImage',
-    'isEquation',
-    'isSimpleText'
-  ];
-
-
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  uploadFile: any;
-
-
-  hasBaseDropZoneOver: boolean = false;
-  options: Object = {
-    url: 'https://www.mistu.org/etutor/uploadimages.php/'
-  };
-  sizeLimit = 2000000;
 
   handleUpload(data): void {
     if (data && data.response) {

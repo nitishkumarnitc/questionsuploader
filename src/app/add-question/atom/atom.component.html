@@ -13,6 +13,7 @@
       </md-radio-group>
     </div>
 
+
     <div class="col-6">
       <textarea *ngIf="atom.selectedType!='isImage'"md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
       <input  *ngIf="atom.selectedType=='isImage'" type="file"
