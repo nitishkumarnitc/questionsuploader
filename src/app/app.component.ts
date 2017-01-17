@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IndexService} from "./index.service";
 import {Chapter} from "./chapter";
-
-
+import {Molecule} from "./add-question/molecule";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,6 +18,7 @@ export class AppComponent implements OnInit{
   private option3="Option3";
   private option4="Option4";
   private solution="Solution";
+  private problem:Molecule[]=[];
 
   ngOnInit(): void {
     this._indexService.getChapters()
@@ -34,6 +34,21 @@ export class AppComponent implements OnInit{
     this.selectedChapter = chapter;
   }
 
+  handleMoleculeRecieved(molecule){
+    this.problem.push(molecule);
+    this.printProblem(this.problem);
+
+  }
+
+  printProblem(problem){
+    console.log("Trying to Print Problem");
+    for(let molecule of problem){
+      console.log(molecule.portionType);
+      for(let atom of molecule.portion){
+        console.log("Text:" +atom.text + "Selected Type :"+atom.selectedType);
+      }
+    }
+  }
 
 }
 

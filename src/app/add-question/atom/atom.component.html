@@ -37,7 +37,7 @@
 
   </div>
 
-<div class="row">
+<div class="row" *ngIf="doneWithThisPortion==false">
 
   <div class="col-4">
 
@@ -77,7 +77,7 @@
       <md-icon class="md-24">add</md-icon>
     </button>
 
-    <button md-raised-button color="warn"><md-icon>done</md-icon></button>
+    <button md-raised-button color="warn" (click)="onClickOk()" ><md-icon>done</md-icon></button>
   </div>
 
 </div>

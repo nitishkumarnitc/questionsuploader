@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Atom} from "./atom";
 
 
@@ -12,10 +12,11 @@ import {Atom} from "./atom";
 export class AtomComponent implements OnInit {
 
 
-
+  @Output() portionAdded=new EventEmitter<Atom[]>();
   selectedRadioButton: string;
   selectedText:string;
-  atomsArray:Atom[]=[];;;;;
+  atomsArray:Atom[]=[];
+  doneWithThisPortion:boolean=false;
   onClickPlus(){
          if(this.selectedRadioButton=='isImage'){
            console.log("Inside image");
@@ -24,7 +25,7 @@ export class AtomComponent implements OnInit {
            this.atomsArray.push(atom);
            this.selectedText=null;
            this.selectedRadioButton=null;
-           this.printAtomClientsArray();
+          this.printAtomClientsArray();
 
          }else{
            console.log("Inside image or euation");
@@ -32,15 +33,20 @@ export class AtomComponent implements OnInit {
            this.atomsArray.push(atom);
            this.selectedText=null;
            this.selectedRadioButton=null;
-           this.printAtomClientsArray();
+            this.printAtomClientsArray();
 
          }
   }
+  onClickOk(){
+    this.onClickPlus();
+    this.doneWithThisPortion=true;
+    this.portionAdded.emit(this.atomsArray);
+  }
 
   printAtomClientsArray(){
-    console.log("Inside printClients Array"+"Size is"+ this.atomsArray.length);
-    for(let atom in this.atomsArray){
-        console.log("Printing clients array"+atom);
+    console.log("Inside print Array Atom . "+"Size is"+ this.atomsArray.length);
+    for(let atom of this.atomsArray){
+        console.log("Printing clients array"+ "Text "+atom.text +"selectedType"+atom.selectedType);
     }
   }
 
