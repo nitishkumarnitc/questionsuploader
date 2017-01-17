@@ -1,4 +1,42 @@
 <div class="container">
+
+
+  <div class="row" *ngFor="let atomClient of atomClientsArray">
+
+    <div class="col-6">
+
+      <md-radio-group class="example-radio-group " [(ngModel)]="atomClient.selectedType">
+        <md-radio-button class="example-radio-button" *ngFor="let textType of textTypes" [value]="textType">
+          {{textType}}
+        </md-radio-button>
+        <div class="example-selected-value">Selected Type is : {{atomClient.selectedType}}</div>
+      </md-radio-group>
+    </div>
+
+    <div class="col-6">
+      <textarea *ngIf="atomClient.selectedType!='isImage'"md-input placeholder="text" [(ngModel)]="atomClient.text" ></textarea>
+      <input  *ngIf="atomClient.selectedType=='isImage'" type="file"
+              ngFileSelect
+              [options]="options"
+              (onUpload)="handleUpload($event)"
+              (beforeUpload)="beforeUpload($event)">
+
+
+      <div ngFileDrop
+           [options]="options"
+           (onUpload)="handleUpload($event)"
+           [ngClass]="{'file-over': hasBaseDropZoneOver}"
+           (onFileOver)="fileOverBase($event)"
+           (beforeUpload)="beforeUpload($event)">
+      </div>
+
+      <div>
+        Response: {{ atomClient.text | json }}
+      </div>
+    </div>
+
+  </div>
+
 <div class="row">
 
   <div class="col-4">
@@ -12,7 +50,7 @@
   </div>
 
   <div class="col-4">
-    <textarea *ngIf="selectedRadioButton!='isImage'"md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
+    <textarea *ngIf="selectedRadioButton!='isImage'"md-input placeholder="text" [(ngModel)]="selectedText" ></textarea>
     <input  *ngIf="selectedRadioButton=='isImage'" type="file"
            ngFileSelect
            [options]="options"
@@ -35,14 +73,12 @@
 
   <div class="col-4">
 
-    <button md-fab>
+    <button md-fab (click)="onClickPlus()">
       <md-icon class="md-24">add</md-icon>
     </button>
 
     <button md-raised-button color="warn"><md-icon>done</md-icon></button>
   </div>
-
-
 
 </div>
 </div>
