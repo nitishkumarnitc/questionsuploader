@@ -1,9 +1,4 @@
-export class AtomClient {
-  // constructor(
-  //   public text:string,
-  //   public selectedType:string
-  //   ) {}
-
+export class Atom {
   public text:string;
   public selectedType: string;
   constructor(text: string, selectedType: string) {
