@@ -1,15 +1,15 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {Molecule} from "./molecule";
 
 @Component({
   selector: 'app-add-question',
   templateUrl: './add-question.component.html',
   styleUrls: ['./add-question.component.css']
 })
-export class AddQuestionComponent implements OnInit {
 
+export class AddQuestionComponent implements OnInit {
   @Input() questionPortion:string;
-  @Output() moleculeFormed=new EventEmitter<Molecule>();
+  @Output() questionsPortionAdded=new EventEmitter<any>();
+  portionsJsonObject:any;
 
   constructor() { }
 
@@ -18,16 +18,43 @@ export class AddQuestionComponent implements OnInit {
 
   handlePortionAdded(input){
     console.log("Inside Add-question");
+    this.formPortionsJsonObject(input);
+
     this.printPortionArray(input);
+    this.printJsonPortionArray();
+    this.questionsPortionAdded.emit(this.portionsJsonObject);
+  }
+
+  formPortionsJsonObject(input){
+    if(this.questionPortion=="Statement"){
+      this.portionsJsonObject={"Statement":input};
+    }else if(this.questionPortion=="Option1"){
+      this.portionsJsonObject={"Option1":input};
+    }else if(this.questionPortion=="Option2"){
+      this.portionsJsonObject={"Option2":input};
+    } else if(this.questionPortion=="Option3"){
+      this.portionsJsonObject={"Option3":input};
+    } else if(this.questionPortion=="Option4"){
+      this.portionsJsonObject={"Option4":input};
+    } else if(this.questionPortion=="Solution"){
+      this.portionsJsonObject={"Solution":input};
+    }
   }
 
   printPortionArray(input){
-    console.log("Inside print Array Atom . "+"Size is"+ input.length);
-    for(let atom of input){
-      console.log("Printing clients array"+ "Text "+atom.text +"selectedType"+atom.selectedType);
+    console.log("Inside printing portionArray . "+"Size is"+ input.length);
+    for(let atom of input) {
+      console.log("Text " + atom.text + "IsImage: "+ atom.isImage +" IsEquation " +atom.isEquation
+      +" IsText : "+atom.isText);
     }
-    let molecule=new Molecule(this.questionPortion,input);
-    this.moleculeFormed.emit(molecule);
+  }
+
+  printJsonPortionArray(){
+    console.log("Inside printing JsonPortion");
+    for(let atom of this.portionsJsonObject[this.questionPortion]){
+      console.log("Text "+ atom['text'] + "IsImage "+ atom['isImage'] + "IsEquation" +atom['isEquation']
+    + "IsText" + atom['isText']);
+    }
   }
 
 }

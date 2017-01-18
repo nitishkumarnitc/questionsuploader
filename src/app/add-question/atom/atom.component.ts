@@ -1,5 +1,4 @@
 /*Basic simple form*/
-
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Atom} from "./atom";
 
@@ -9,9 +8,9 @@ import {Atom} from "./atom";
   styleUrls: ['./atom.component.css'],
 
 })
+
 export class AtomComponent implements OnInit {
   @Output() portionAdded=new EventEmitter<Atom[]>();
- // selectedRadioButton:string;
   atomsArray:Atom[]=[];
   atom:Atom=new Atom("",false,false,false);
   doneWithThisPortion:boolean=false;
@@ -37,14 +36,11 @@ export class AtomComponent implements OnInit {
            this.atomsArray.push(new Atom(this.atom.text,true,false,false));
            this.atom=new Atom("",false,false,false);
            this.printAtomsArray();
-
          }else if(this.atom.isImage==true){
-
            console.log("Inside Image");
            this.atomsArray.push(new Atom(this.uploadFile['originalName'],false,true,false));
            this.atom=new Atom("",false,false,false);
            this.printAtomsArray();
-
          }else{
            console.log("Inside Equation");
            this.atomsArray.push(new Atom(this.atom.text,false,false,true));
@@ -66,6 +62,7 @@ export class AtomComponent implements OnInit {
     }
   }
 
+
   handleUpload(data): void {
     if (data && data.response) {
       data = JSON.parse(data.response);
@@ -83,5 +80,4 @@ export class AtomComponent implements OnInit {
       alert('File is too large');
     }
   }
-
 }
