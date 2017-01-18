@@ -1,4 +1,5 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import {AtomComponent} from "./atom/atom.component";
 
 @Component({
   selector: 'app-add-question',
@@ -9,11 +10,16 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 export class AddQuestionComponent implements OnInit {
   @Input() questionPortion:string;
   @Output() questionsPortionAdded=new EventEmitter<any>();
+  @ViewChild('atomChild') atomChild:AtomComponent;
   portionsJsonObject:any;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  callAtomComponentEventEmittor(){
+    this.atomChild.onFinalFormSubmission();
   }
 
   handlePortionAdded(input){
@@ -24,6 +30,8 @@ export class AddQuestionComponent implements OnInit {
     this.printJsonPortionArray();
     this.questionsPortionAdded.emit(this.portionsJsonObject);
   }
+
+
 
   formPortionsJsonObject(input){
     if(this.questionPortion=="Statement"){

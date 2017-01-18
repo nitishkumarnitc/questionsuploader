@@ -12,25 +12,25 @@
 
     <h3>Add Question</h3>
     <div class="row">
-        <app-add-question [questionPortion]="statement" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+        <app-add-question #statementPortion [questionPortion]="statement" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question [questionPortion]="option1" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionOnePortion [questionPortion]="option1" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question [questionPortion]="option2" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionTwoPortion [questionPortion]="option2" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question [questionPortion]="option3" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionThreePortion [questionPortion]="option3" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question [questionPortion]="option4" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionFourPortion [questionPortion]="option4" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question [questionPortion]="solution" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #solutionPortion [questionPortion]="solution" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
 
     <div class="row">
-      <button md-raised-button color="primary"><md-icon>done_all</md-icon></button>
+      <button md-raised-button color="primary" (click)="requestComponentsToSendData()" )><md-icon>done_all</md-icon></button>
     </div>
 </div>

@@ -1,4 +1,4 @@
 <h3 *ngIf="questionPortion">{{questionPortion}}</h3>
-<app-atom (portionAdded)="handlePortionAdded($event)">
+<app-atom #atomChild (portionAdded)="handlePortionAdded($event)">
 
 </app-atom>

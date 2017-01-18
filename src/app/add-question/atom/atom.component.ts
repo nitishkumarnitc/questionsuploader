@@ -48,7 +48,13 @@ export class AtomComponent implements OnInit {
           this.printAtomsArray();
          }
   }
-  onClickOk(){
+  // onClickOk(){
+  //   this.onClickPlus();
+  //   this.doneWithThisPortion=true;
+  //   this.portionAdded.emit(this.atomsArray);
+  // }
+
+  onFinalFormSubmission(){
     this.onClickPlus();
     this.doneWithThisPortion=true;
     this.portionAdded.emit(this.atomsArray);

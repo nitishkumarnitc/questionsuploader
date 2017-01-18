@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IndexService} from "./index.service";
 import {Chapter} from "./chapter";
+import {AddQuestionComponent} from "./add-question/add-question.component";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,6 +19,12 @@ export class AppComponent implements OnInit{
   private option4="Option4";
   private solution="Solution";
   private problem=[];
+  @ViewChild('statementPortion') statementPortion:AddQuestionComponent;
+  @ViewChild('optionOnePortion') optionOnePortion:AddQuestionComponent;
+  @ViewChild('optionTwoPortion') optionTwoPortion:AddQuestionComponent;
+  @ViewChild('optionThreePortion') optionThreePortion:AddQuestionComponent;
+  @ViewChild('optionFourPortion') optionFourPortion:AddQuestionComponent;
+  @ViewChild('solutionPortion') solutionPortion:AddQuestionComponent;
 
   ngOnInit(): void {
     this._indexService.getChapters()
@@ -37,6 +44,15 @@ export class AppComponent implements OnInit{
     this.problem.push(keyValuePair);
     this.printProblem(this.problem);
 
+  }
+
+  requestComponentsToSendData(){
+    this.statementPortion.callAtomComponentEventEmittor();
+    this.optionOnePortion.callAtomComponentEventEmittor();
+    this.optionTwoPortion.callAtomComponentEventEmittor();
+    this.optionThreePortion.callAtomComponentEventEmittor();
+    this.optionFourPortion.callAtomComponentEventEmittor();
+    this.solutionPortion.callAtomComponentEventEmittor();
   }
 
   printProblem(problem){
