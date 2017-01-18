@@ -5,7 +5,7 @@ import {Chapter} from "./chapter";
 
 @Injectable()
 export class IndexService {
-  private _chaptersUrl="https://www.mistu.org/etutor/getchapters.php/"
+  private _chaptersUrl="http://www.mistu.org/etutor/getchapters.php/"
   constructor(private _http:Http) { }
   getChapters():Observable<Chapter[]>{
       return this._http.get(this._chaptersUrl)

@@ -11,21 +11,18 @@ import {Atom} from "./atom";
 })
 export class AtomComponent implements OnInit {
   @Output() portionAdded=new EventEmitter<Atom[]>();
-  selectedRadioButton: string;
-  selectedText:string;
+ // selectedRadioButton:string;
   atomsArray:Atom[]=[];
+  atom:Atom=new Atom("",false,false,false);
   doneWithThisPortion:boolean=false;
-
-  textTypes = [
-    'isImage',
-    'isEquation',
-    'isSimpleText'
-  ];
+  isImage:string="IsImage";
+  isEquation:string="IsEquation";
+  isText="IsText";
 
   uploadFile: any;
   hasBaseDropZoneOver: boolean = false;
   options: Object = {
-    url: 'http://localhost:10050/upload'
+    url: 'http://www.mistu.org/etutor/uploadimages.php'
   };
   sizeLimit = 2000000;
 
@@ -35,23 +32,24 @@ export class AtomComponent implements OnInit {
   }
 
   onClickPlus(){
-         if(this.selectedRadioButton=='isImage'){
-           console.log("Inside image");
-           let atom=new Atom(this.uploadFile['originalName'],this.selectedRadioButton);
+         if(this.atom.isText==true){
+           console.log("Inside Atom Text");
+           this.atomsArray.push(new Atom(this.atom.text,true,false,false));
+           this.atom=new Atom("",false,false,false);
+           this.printAtomsArray();
 
-           this.atomsArray.push(atom);
-           this.selectedText=null;
-           this.selectedRadioButton=null;
-          this.printAtomClientsArray();
+         }else if(this.atom.isImage==true){
+
+           console.log("Inside Image");
+           this.atomsArray.push(new Atom(this.uploadFile['originalName'],false,true,false));
+           this.atom=new Atom("",false,false,false);
+           this.printAtomsArray();
 
          }else{
-           console.log("Inside image or euation");
-            let atom=new Atom(this.selectedText,this.selectedRadioButton);
-           this.atomsArray.push(atom);
-           this.selectedText=null;
-           this.selectedRadioButton=null;
-            this.printAtomClientsArray();
-
+           console.log("Inside Equation");
+           this.atomsArray.push(new Atom(this.atom.text,false,false,true));
+           this.atom=new Atom("",false,false,false);
+          this.printAtomsArray();
          }
   }
   onClickOk(){
@@ -60,10 +58,11 @@ export class AtomComponent implements OnInit {
     this.portionAdded.emit(this.atomsArray);
   }
 
-  printAtomClientsArray(){
+  printAtomsArray(){
     console.log("Inside print Array Atom . "+"Size is"+ this.atomsArray.length);
     for(let atom of this.atomsArray){
-        console.log("Printing clients array"+ "Text "+atom.text +"selectedType"+atom.selectedType);
+        console.log("Printing Atoms array"+ "Text :"+ atom.text + "isText: "+ atom.isText + "isImage:"+ atom.isImage
+        +"isEquation:"+atom.isEquation);
     }
   }
 
