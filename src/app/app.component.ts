@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IndexService} from "./index.service";
-import {Chapter} from "./chapter";
+import {Chapter, Subject, Branch} from "./interfaces";
 import {AddQuestionComponent} from "./add-question/add-question.component";
 @Component({
   selector: 'app-root',
@@ -10,7 +10,9 @@ import {AddQuestionComponent} from "./add-question/add-question.component";
 })
 export class AppComponent implements OnInit{
 
-  private chapters:Chapter[];
+  private chapters:Chapter[]=[];
+  private subjects:Subject[]=[];
+  private branches:Branch[]=[];
   private errorMessage: String;
   private statement="Statement";
   private option1="Option1";
@@ -19,6 +21,11 @@ export class AppComponent implements OnInit{
   private option4="Option4";
   private solution="Solution";
   private problem=[];
+
+  selectedSubjectId:number;
+  selectedBranchId:number;
+
+
   @ViewChild('statementPortion') statementPortion:AddQuestionComponent;
   @ViewChild('optionOnePortion') optionOnePortion:AddQuestionComponent;
   @ViewChild('optionTwoPortion') optionTwoPortion:AddQuestionComponent;
@@ -27,23 +34,23 @@ export class AppComponent implements OnInit{
   @ViewChild('solutionPortion') solutionPortion:AddQuestionComponent;
 
   ngOnInit(): void {
-    this._indexService.getChapters()
-      .subscribe(chapters=>this.chapters=chapters, error=>this.errorMessage=<any>error);
+    this._indexService.getSubjects()
+      .subscribe(subjects=>this.subjects=subjects, error=>this.errorMessage=<any>error);
   }
 
   constructor(private _indexService:IndexService){}
   title = 'Adding Question to Question Bank';
 
-  selectedChapter: Chapter;
-
-  onSelect(chapter: Chapter): void {
-    this.selectedChapter = chapter;
-  }
-
   handleQuestionsPortionAdded(keyValuePair){
     this.problem.push(keyValuePair);
     this.printProblem(this.problem);
 
+  }
+
+  subjectSelected(subjectId){
+    console.log("Subject Selected id is : "+subjectId);
+    this._indexService.getBranches(subjectId)
+      .subscribe(branches=>this.branches=branches,error=>this.errorMessage=<any>error);
   }
 
   requestComponentsToSendData(){
