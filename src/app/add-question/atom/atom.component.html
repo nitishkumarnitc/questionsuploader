@@ -18,7 +18,7 @@
 
 
     <div class="col-6">
-      <textarea *ngIf="atom.isText==true" md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
+      <textarea *ngIf="atom.isText==true||atom.isEquation==true" md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
       <input  *ngIf="atom.isImage==true" type="file"
               ngFileSelect
               [options]="options"
@@ -59,7 +59,7 @@
     </div>
 
     <div class="col">
-      <textarea *ngIf="atom.isImage==false" md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
+      <textarea *ngIf="atom.isText==true||atom.isEquation==true" md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
       <input  *ngIf="atom.isImage==true" type="file"
               ngFileSelect
               [options]="options"
@@ -75,7 +75,7 @@
            (beforeUpload)="beforeUpload($event)">
       </div>
 
-      <div *ngIf="atom.isImage!=false">
+      <div *ngIf="atom.isImage==true">
         Response: {{ uploadFile | json }}
       </div>
 

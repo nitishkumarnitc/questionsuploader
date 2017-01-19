@@ -14,6 +14,7 @@ export class AtomComponent implements OnInit {
   atomsArray:Atom[]=[];
   atom:Atom=new Atom("",false,false,false);
   doneWithThisPortion:boolean=false;
+
   isImage:string="IsImage";
   isEquation:string="IsEquation";
   isText="IsText";
@@ -41,7 +42,7 @@ export class AtomComponent implements OnInit {
            this.atomsArray.push(new Atom(this.uploadFile['originalName'],false,true,false));
            this.atom=new Atom("",false,false,false);
           // this.printAtomsArray();
-         }else{
+         }else if(this.atom.isEquation==true){
            console.log("Inside Equation");
            this.atomsArray.push(new Atom(this.atom.text,false,false,true));
            this.atom=new Atom("",false,false,false);
