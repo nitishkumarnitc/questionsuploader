@@ -19,13 +19,16 @@
 
     <div class="col-6">
       <textarea *ngIf="atom.isText==true||atom.isEquation==true" md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
-      <input  *ngIf="atom.isImage==true" type="file"
-              ngFileSelect
-              [options]="options"
-              (onUpload)="handleUpload($event)"
-              (beforeUpload)="beforeUpload($event)">
+      <input *ngIf="atom.isImage==true" type="file"
+             ngFileSelect
+             [options]="options"
+             (onUpload)="handleUpload($event)"
+             (beforeUpload)="beforeUpload($event)">
 
-
+      <!-- drag & drop file example-->
+      <style>
+        .file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+      </style>
       <div ngFileDrop
            [options]="options"
            (onUpload)="handleUpload($event)"
@@ -35,7 +38,7 @@
       </div>
 
       <div>
-        Response: {{ atom.text | json }}
+        Response:{{atom.text}}
       </div>
     </div>
 
@@ -60,13 +63,16 @@
 
     <div class="col">
       <textarea *ngIf="atom.isText==true||atom.isEquation==true" md-input placeholder="text" [(ngModel)]="atom.text" ></textarea>
-      <input  *ngIf="atom.isImage==true" type="file"
-              ngFileSelect
-              [options]="options"
-              (onUpload)="handleUpload($event)"
-              (beforeUpload)="beforeUpload($event)">
+      <input *ngIf="atom.isImage==true" type="file"
+             ngFileSelect
+             [options]="options"
+             (onUpload)="handleUpload($event)"
+             (beforeUpload)="beforeUpload($event)">
 
-
+      <!-- drag & drop file example-->
+      <style>
+        .file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+      </style>
       <div ngFileDrop
            [options]="options"
            (onUpload)="handleUpload($event)"
@@ -75,19 +81,15 @@
            (beforeUpload)="beforeUpload($event)">
       </div>
 
-      <div *ngIf="atom.isImage==true">
-        Response: {{ uploadFile | json }}
+      <div>
+        Response:{{atom.text}}
       </div>
-
     </div>
 
     <div class="col">
-
-      <button md-fab (click)="onClickPlus()">
+      <button *ngIf="atom.text!='' || uploadFile!=null " md-fab (click)="onClickPlus()">
         <md-icon class="md-24">add</md-icon>
       </button>
-
-      <!--<button md-raised-button color="warn" (click)="onClickOk()" ><md-icon>done</md-icon></button>-->
     </div>
 
   </div>

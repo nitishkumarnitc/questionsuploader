@@ -7,8 +7,9 @@ import { AppComponent } from './app.component';
 import {MaterialModule} from "@angular/material";
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { AtomComponent } from './add-question/atom/atom.component';
-import { Ng2UploaderModule } from 'ng2-uploader';
 import 'hammerjs';
+import { NgUploaderModule } from 'ngx-uploader';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import 'hammerjs';
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    Ng2UploaderModule
+    NgUploaderModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
