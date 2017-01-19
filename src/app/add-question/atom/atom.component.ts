@@ -35,17 +35,17 @@ export class AtomComponent implements OnInit {
            console.log("Inside Atom Text");
            this.atomsArray.push(new Atom(this.atom.text,true,false,false));
            this.atom=new Atom("",false,false,false);
-           this.printAtomsArray();
+          // this.printAtomsArray();
          }else if(this.atom.isImage==true){
            console.log("Inside Image");
            this.atomsArray.push(new Atom(this.uploadFile['originalName'],false,true,false));
            this.atom=new Atom("",false,false,false);
-           this.printAtomsArray();
+          // this.printAtomsArray();
          }else{
            console.log("Inside Equation");
            this.atomsArray.push(new Atom(this.atom.text,false,false,true));
            this.atom=new Atom("",false,false,false);
-          this.printAtomsArray();
+          //this.printAtomsArray();
          }
   }
   // onClickOk(){
@@ -60,13 +60,13 @@ export class AtomComponent implements OnInit {
     this.portionAdded.emit(this.atomsArray);
   }
 
-  printAtomsArray(){
-    console.log("Inside print Array Atom . "+"Size is"+ this.atomsArray.length);
-    for(let atom of this.atomsArray){
-        console.log("Printing Atoms array"+ "Text :"+ atom.text + "isText: "+ atom.isText + "isImage:"+ atom.isImage
-        +"isEquation:"+atom.isEquation);
-    }
-  }
+  // printAtomsArray(){
+  //   console.log("Inside print Array Atom . "+"Size is"+ this.atomsArray.length);
+  //   for(let atom of this.atomsArray){
+  //       console.log("Printing Atoms array"+ "Text :"+ atom.text + "isText: "+ atom.isText + "isImage:"+ atom.isImage
+  //       +"isEquation:"+atom.isEquation);
+  //   }
+  // }
 
 
   handleUpload(data): void {

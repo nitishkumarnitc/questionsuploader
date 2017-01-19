@@ -26,8 +26,8 @@ export class AddQuestionComponent implements OnInit {
     console.log("Inside Add-question");
     this.formPortionsJsonObject(input);
 
-    this.printPortionArray(input);
-    this.printJsonPortionArray();
+    //this.printPortionArray(input);
+    //this.printJsonPortionArray();
     this.questionsPortionAdded.emit(this.portionsJsonObject);
   }
 
@@ -49,20 +49,20 @@ export class AddQuestionComponent implements OnInit {
     }
   }
 
-  printPortionArray(input){
-    console.log("Inside printing portionArray . "+"Size is"+ input.length);
-    for(let atom of input) {
-      console.log("Text " + atom.text + "IsImage: "+ atom.isImage +" IsEquation " +atom.isEquation
-      +" IsText : "+atom.isText);
-    }
-  }
+  // printPortionArray(input){
+  //   console.log("Inside printing portionArray . "+"Size is"+ input.length);
+  //   for(let atom of input) {
+  //     console.log("Text " + atom.text + "IsImage: "+ atom.isImage +" IsEquation " +atom.isEquation
+  //     +" IsText : "+atom.isText);
+  //   }
+  // }
 
-  printJsonPortionArray(){
-    console.log("Inside printing JsonPortion");
-    for(let atom of this.portionsJsonObject[this.questionPortion]){
-      console.log("Text "+ atom['text'] + "IsImage "+ atom['isImage'] + "IsEquation" +atom['isEquation']
-    + "IsText" + atom['isText']);
-    }
-  }
+  // printJsonPortionArray(){
+  //   console.log("Inside printing JsonPortion");
+  //   for(let atom of this.portionsJsonObject[this.questionPortion]){
+  //     console.log("Text "+ atom['text'] + "IsImage "+ atom['isImage'] + "IsEquation" +atom['isEquation']
+  //   + "IsText" + atom['isText']);
+  //   }
+  // }
 
 }
