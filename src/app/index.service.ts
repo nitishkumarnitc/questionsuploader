@@ -10,9 +10,10 @@ export class IndexService {
   private _subjectsUrl=this.homeUrl+"getsubjects.php/";
   private _branchUrl=this.homeUrl+"getbranchesusingid.php/";
   private _chaptersUrl=this.homeUrl+"getchapters.php/";
-  private _topicsUrl=this.homeUrl+"gettopics.php/";
-  private _nextQuestionNumberUrl=this.homeUrl+"getnextquestionnumber.php/"
-  private getsSuffix="?id="
+  private _topicsUrl=this.homeUrl+"gettopicsbychapterid.php/";
+  private _getBaseImageResponse=this.homeUrl+"getbaseimageresponse.php/"
+  private getsSuffix="?id=";
+  private branchGetsSuffix="?branch="
 
   constructor(private _http:Http) { }
 
@@ -29,21 +30,22 @@ export class IndexService {
       .do(data=>console.log("Subjects:"+ JSON.stringify(data)));
   }
 
-  getChapters(branchId:number):Observable<Chapter[]>{
-      return this._http.get(this._chaptersUrl+this.getsSuffix+String(branchId))
+  getChapters(branchName:number):Observable<Chapter[]>{
+      return this._http.get(this._chaptersUrl+this.branchGetsSuffix+String(branchName))
         .map((response:Response)=><Chapter[]> response.json())
         .do(data=>console.log("Chapters:"+ JSON.stringify(data)));
   }
 
-  getTopics():Observable<Topic[]>{
-    return this._http.get(this._topicsUrl)
+  getTopics(chapterId:number):Observable<Topic[]>{
+    return this._http.get(this._topicsUrl+this.getsSuffix+String(chapterId))
       .map((response:Response)=><Topic[]> response.json())
       .do(data=>console.log("Topics:"+ JSON.stringify(data)));
   }
 
-  getNextQuestionNumber():Observable<number>{
-    return this._http.get(this._nextQuestionNumberUrl)
-      .map((response:Response)=><number> response.json())
+  /*Returns base image url(path) by creating appropriate directory on server , question number that is going to be addedd */
+  getBaseImageResponse(topicId:number):Observable<any>{
+    return this._http.get(this._getBaseImageResponse+this.getsSuffix+String(topicId))
+      .map((response:Response)=><any> response.json())
       .do(data=>console.log("NextQuestionNumber"+JSON.stringify(data)));
   }
 

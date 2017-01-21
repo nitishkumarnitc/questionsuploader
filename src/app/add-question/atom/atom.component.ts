@@ -14,6 +14,7 @@ import {NgUploaderOptions, NgUploaderService} from 'ngx-uploader';
 
 export class AtomComponent implements OnInit {
   @Output() portionAdded=new EventEmitter<Atom[]>();
+  @Input() baseImageUrl:string;
   @Input() id;
   atomsArray:Atom[]=[];
   atom:Atom=new Atom("",false,false,false);
@@ -26,13 +27,16 @@ export class AtomComponent implements OnInit {
   uploadFile: any;
   hasBaseDropZoneOver: boolean = false;
   options: NgUploaderOptions = {
-    url: 'http://www.mistu.org/etutor/uploadimages.php'
+    url: 'http://www.mistu.org/etutor/uploadimages.php',
+    data:"hello world"
+
   };
   sizeLimit = 2000000;
 
   constructor() { }
 
   ngOnInit() {
+    console.log("Inside Atom: Base Image Url "+this.baseImageUrl);
   }
 
   onClickPlus(){

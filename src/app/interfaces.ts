@@ -1,3 +1,13 @@
+export interface Subject{
+  subjectId:number;
+  subjectName:string;
+}
+
+export interface Branch{
+  branchId:number;
+  branchName:string;
+}
+
 export interface Chapter {
   chapterId:number;
   chapterName:string;
@@ -8,12 +18,3 @@ export interface Topic{
   topicName:string;
 }
 
-export interface Subject{
-  subjectId:number;
-  subjectName:string;
-}
-
-export interface Branch{
-  branchId:number;
-  branchName:string;
-}

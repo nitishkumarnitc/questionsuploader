@@ -1,4 +1,4 @@
 <h3 *ngIf="questionPortion">{{questionPortion}}</h3>
-<app-atom #atomChild [id]="questionPortion" (portionAdded)="handlePortionAdded($event)">
+<app-atom #atomChild [id]="questionPortion" [baseImageUrl]="baseImageUrl" (portionAdded)="handlePortionAdded($event)">
 
 </app-atom>

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IndexService} from "./index.service";
-import {Chapter, Subject, Branch} from "./interfaces";
+import {Chapter, Subject, Branch, Topic} from "./interfaces";
 import {AddQuestionComponent} from "./add-question/add-question.component";
 @Component({
   selector: 'app-root',
@@ -10,9 +10,11 @@ import {AddQuestionComponent} from "./add-question/add-question.component";
 })
 export class AppComponent implements OnInit{
 
-  private chapters:Chapter[]=[];
+
   private subjects:Subject[]=[];
   private branches:Branch[]=[];
+  private chapters:Chapter[]=[];
+  private topics:Topic[]=[];
   private errorMessage: String;
   private statement="Statement";
   private option1="Option1";
@@ -22,8 +24,12 @@ export class AppComponent implements OnInit{
   private solution="Solution";
   private problem=[];
 
+
   selectedSubjectId:number;
-  selectedBranchId:number;
+  selectedBranchName:string;
+  selectedChapterId:number;
+  selectedTopicId:number;
+  baseImageResponse:any;
 
 
   @ViewChild('statementPortion') statementPortion:AddQuestionComponent;
@@ -52,6 +58,30 @@ export class AppComponent implements OnInit{
     this._indexService.getBranches(subjectId)
       .subscribe(branches=>this.branches=branches,error=>this.errorMessage=<any>error);
   }
+
+  branchSelected(branchName){
+    console.log("Branch Name Selected id is :" +branchName);
+    this._indexService.getChapters(branchName)
+      .subscribe(chapters=>this.chapters=chapters, error=>this.errorMessage=<any>error);
+  }
+
+  chapterSelected(chapterId){
+    console.log("Chapter Selected id is : "+chapterId);
+    this._indexService.getTopics(chapterId)
+      .subscribe(topics=>this.topics=topics,error=>this.errorMessage=<any> error);
+  }
+
+  topicSelected(topicId){
+    console.log("Topic selected id is : "+topicId);
+    this._indexService.getBaseImageResponse(topicId)
+      .subscribe(baseImageResponse=>this.baseImageResponse=baseImageResponse,error=>this.errorMessage=<any> error);
+
+   // while (this.baseImageResponse==null);
+    //console.log("Base Image Response is "+ this.baseImageResponse);
+    //console.log("Base Image Url is "+this.baseImageResponse['baseImageUrl']);
+
+  }
+
 
   requestComponentsToSendData(){
     this.statementPortion.callAtomComponentEventEmittor();

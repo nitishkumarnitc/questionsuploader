@@ -9,6 +9,7 @@ import {AtomComponent} from "./atom/atom.component";
 
 export class AddQuestionComponent implements OnInit {
   @Input() questionPortion:string;
+  @Input() baseImageUrl:string;
   @Output() questionsPortionAdded=new EventEmitter<any>();
   @ViewChild('atomChild') atomChild:AtomComponent;
   portionsJsonObject:any;
@@ -16,6 +17,8 @@ export class AddQuestionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    console.log("Base Image Url :"+this.baseImageUrl);
   }
 
   callAtomComponentEventEmittor(){

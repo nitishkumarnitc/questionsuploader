@@ -1,48 +1,60 @@
 <div class="container">
   <div class="row">
-      <div class="col-4">
+      <div class="col-2">
 
-        <form>
-          <md-select placeholder="Select Subject" [(ngModel)]="selectedSubjectId" name="subject">
+        <form class="row">
+          <md-select placeholder="Select Subject" [(ngModel)]="selectedSubjectId" name="subject" class="col-12">
             <md-option *ngFor="let subject of subjects" [value]="subject.subjectId" (onSelect)="subjectSelected(subject.subjectId)">
                {{subject.subjectName}}
             </md-option>
           </md-select>
 
-          <p> Selected value: {{selectedSubjectId}}</p>
-
-          <md-select placeholder="Select Branch" [(ngModel)]="selectedBranchId" name="branch">
-            <md-option *ngFor="let branch of branches" [value]="branch.branchId">
+          <md-select placeholder="Select Branch" [(ngModel)]="selectedBranchName" name="branch" class="col-12">
+            <md-option *ngFor="let branch of branches" [value]="branch.branchName" (onSelect)="branchSelected(branch.branchName)">
               {{branch.branchName}}
             </md-option>
 
           </md-select>
-          <p> Selected Branch Id : {{selectedBranchId}}</p>
+          <!--<p> Selected Branch Name : {{selectedBranchName}}</p>-->
 
+          <md-select placeholder="Select Chapter" [(ngModel)]="selectedChapterId" name="chapter" class="col-12">
+            <md-option *ngFor="let chapter of chapters" [value]="chapter.chapterId" (onSelect)="chapterSelected(chapter.chapterId)">
+              {{chapter.chapterName}}
+            </md-option>
+          </md-select>
+          <!--<p>Selected Chapter id is :{{selectedChapterId}}</p>-->
+
+          <md-select placeholder="Select Topic" [(ngModel)]="selectedTopicId" name="topic" class="col-12">
+            <md-option *ngFor="let topic of topics" [value]="topic.topicId" (onSelect)="topicSelected(topic.topicId)">
+              {{topic.topicName}}
+            </md-option>
+          </md-select>
+          <!--<p>Selected Topic id is :{{selectedTopicId}}</p>-->
 
         </form>
+
     </div>
 
-  <div class="col-8">
+  <div class="col-10" *ngIf="baseImageResponse">
 
     <h3>Add Question</h3>
     <div class="row">
-        <app-add-question #statementPortion [questionPortion]="statement" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+        <app-add-question #statementPortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="statement" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #optionOnePortion [questionPortion]="option1" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionOnePortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option1" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #optionTwoPortion [questionPortion]="option2" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionTwoPortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option2" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #optionThreePortion [questionPortion]="option3" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionThreePortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option3" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #optionFourPortion [questionPortion]="option4" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionFourPortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option4" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #solutionPortion [questionPortion]="solution" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #solutionPortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="solution" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
 
     <div class="row">
