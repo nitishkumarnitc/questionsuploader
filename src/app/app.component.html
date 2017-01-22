@@ -39,22 +39,22 @@
 
     <h3>Add Question</h3>
     <div class="row">
-        <app-add-question #statementPortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="statement" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+        <app-add-question #statementPortion [tempArray]="tempArray" [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="statement" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #optionOnePortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option1" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionOnePortion [tempArray]="tempArray" [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option1" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #optionTwoPortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option2" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionTwoPortion [tempArray]="tempArray" [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option2" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #optionThreePortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option3" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionThreePortion [tempArray]="tempArray" [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option3" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #optionFourPortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option4" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #optionFourPortion [tempArray]="tempArray"  [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="option4" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
     <div class="row">
-      <app-add-question #solutionPortion [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="solution" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
+      <app-add-question #solutionPortion [tempArray]="tempArray"  [baseImageUrl]="baseImageResponse['baseImageUrl']" [questionPortion]="solution" (questionsPortionAdded)="handleQuestionsPortionAdded($event)"></app-add-question>
     </div>
 
     <div class="row">

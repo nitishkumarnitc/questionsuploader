@@ -24,7 +24,7 @@ export class AppComponent implements OnInit{
   private solution="Solution";
   private problem=[];
   private problemToServer:any;
-
+  private tempArray={};
 
   selectedSubjectId:number;
   selectedBranchName:string;
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit{
   title = 'Adding Question to Question Bank';
 
   addProblemandOtherFields(){
-    this.problemToServer={'problem':this.problem,'topicOrder':this.baseImageResponse['problemNumber']
+    this.problemToServer={'problem':this.tempArray,'topicOrder':this.baseImageResponse['problemNumber']
     , 'topicId':this.selectedTopicId};
 
      this.printProblemToServer(this.problemToServer);
@@ -61,19 +61,20 @@ export class AppComponent implements OnInit{
     console.log("Problem : "+JSON.stringify(problemToServer));
   }
 
-  handleQuestionsPortionAdded(keyValuePair){
-    this.problem.push(keyValuePair);
-
-    if(this.problem.length==6){
-      this.problem.push({'baseImageUrl':this.baseImageResponse['baseImageUrl']});
+  handleQuestionsPortionAdded(){
+   // this.problem.push(keyValuePair);
+      //this.problem.push({'baseImageUrl':this.baseImageResponse['baseImageUrl']});
+      this.tempArray['baseImageUrl']=this.baseImageResponse['baseImageUrl'];
       this.addProblemandOtherFields();
       this.uploadQuestionToServer();
-    }
+
 
   }
 
   uploadQuestionToServer(){
-   // this.printProblem(this.problemToServer);
+    // this.printProblem(this.problemToServer);
+    console.log("Question to be uploaded"+JSON.stringify(this.problemToServer));
+
     this._indexService.uploadQuestionToServer(this.problemToServer)
       .subscribe(response=>this.finalResponseAfterUpload=response,error=>this.errorMessage=<any>error);
   }

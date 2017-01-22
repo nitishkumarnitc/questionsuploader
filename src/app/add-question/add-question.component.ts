@@ -11,6 +11,7 @@ export class AddQuestionComponent implements OnInit {
   @Input() questionPortion:string;
   @Input() baseImageUrl:string;
   @Output() questionsPortionAdded=new EventEmitter<any>();
+  @Input() tempArray=[];
   @ViewChild('atomChild') atomChild:AtomComponent;
   portionsJsonObject:any;
 
@@ -28,27 +29,41 @@ export class AddQuestionComponent implements OnInit {
   handlePortionAdded(input){
     console.log("Inside Add-question");
     this.formPortionsJsonObject(input);
+    console.log("Temp Array"+ JSON.stringify(this.tempArray));
+    console.log("Array Length"+Object.keys(this.tempArray).length);
+
+    if(Object.keys(this.tempArray).length==6){
+      console.log("Array length is 6: so going to emit events");
+      this.questionsPortionAdded.emit();
+    }
 
     //this.printPortionArray(input);
     //this.printJsonPortionArray();
-    this.questionsPortionAdded.emit(this.portionsJsonObject);
+
   }
 
 
 
   formPortionsJsonObject(input){
+
     if(this.questionPortion=="Statement"){
       this.portionsJsonObject={"Statement":input};
+      this.tempArray["Statement"]=input;
     }else if(this.questionPortion=="Option1"){
       this.portionsJsonObject={"Option1":input};
+      this.tempArray["Option1"]=input;
     }else if(this.questionPortion=="Option2"){
       this.portionsJsonObject={"Option2":input};
+      this.tempArray["Option2"]=input;
     } else if(this.questionPortion=="Option3"){
       this.portionsJsonObject={"Option3":input};
+      this.tempArray["Option3"]=input;
     } else if(this.questionPortion=="Option4"){
       this.portionsJsonObject={"Option4":input};
+      this.tempArray["Option4"]=input;
     } else if(this.questionPortion=="Solution"){
       this.portionsJsonObject={"Solution":input};
+      this.tempArray["Solution"]=input;
     }
   }
 
