@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
   private option4="Option4";
   private solution="Solution";
   private problem=[];
+  private problemToServer:any;
 
 
   selectedSubjectId:number;
@@ -30,6 +31,8 @@ export class AppComponent implements OnInit{
   selectedChapterId:number;
   selectedTopicId:number;
   baseImageResponse:any;
+  finalResponseAfterUpload:any;
+
 
 
   @ViewChild('statementPortion') statementPortion:AddQuestionComponent;
@@ -47,10 +50,32 @@ export class AppComponent implements OnInit{
   constructor(private _indexService:IndexService){}
   title = 'Adding Question to Question Bank';
 
+  addProblemandOtherFields(){
+    this.problemToServer={'problem':this.problem,'topicOrder':this.baseImageResponse['problemNumber']
+    , 'topicId':this.selectedTopicId};
+
+     this.printProblemToServer(this.problemToServer);
+  }
+
+  printProblemToServer(problemToServer){
+    console.log("Problem : "+JSON.stringify(problemToServer));
+  }
+
   handleQuestionsPortionAdded(keyValuePair){
     this.problem.push(keyValuePair);
-    this.printProblem(this.problem);
 
+    if(this.problem.length==6){
+      this.problem.push({'baseImageUrl':this.baseImageResponse['baseImageUrl']});
+      this.addProblemandOtherFields();
+      this.uploadQuestionToServer();
+    }
+
+  }
+
+  uploadQuestionToServer(){
+   // this.printProblem(this.problemToServer);
+    this._indexService.uploadQuestionToServer(this.problemToServer)
+      .subscribe(response=>this.finalResponseAfterUpload=response,error=>this.errorMessage=<any>error);
   }
 
   subjectSelected(subjectId){
@@ -75,11 +100,6 @@ export class AppComponent implements OnInit{
     console.log("Topic selected id is : "+topicId);
     this._indexService.getBaseImageResponse(topicId)
       .subscribe(baseImageResponse=>this.baseImageResponse=baseImageResponse,error=>this.errorMessage=<any> error);
-
-   // while (this.baseImageResponse==null);
-    //console.log("Base Image Response is "+ this.baseImageResponse);
-    //console.log("Base Image Url is "+this.baseImageResponse['baseImageUrl']);
-
   }
 
 
@@ -92,12 +112,12 @@ export class AppComponent implements OnInit{
     this.solutionPortion.callAtomComponentEventEmittor();
   }
 
-  printProblem(problem){
-    console.log("Trying to Print Problem at Dada Level");
-    for(let keyValuePair of problem){
-      console.log(JSON.stringify(keyValuePair));
-    }
-  }
+
+
+  // printProblem(problem){
+  //   console.log("Trying to Print Problem to be sent");
+  //   console.log(JSON.stringify(problem));
+  // }
 
 }
 

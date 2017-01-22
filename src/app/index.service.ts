@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from "@angular/http";
+import {Http, Response, Headers} from "@angular/http";
 import {Observable} from "rxjs";
 import {Chapter, Topic, Subject, Branch} from "./interfaces";
 
@@ -11,9 +11,10 @@ export class IndexService {
   private _branchUrl=this.homeUrl+"getbranchesusingid.php/";
   private _chaptersUrl=this.homeUrl+"getchapters.php/";
   private _topicsUrl=this.homeUrl+"gettopicsbychapterid.php/";
-  private _getBaseImageResponse=this.homeUrl+"getbaseimageresponse.php/"
+  private _getBaseImageResponse=this.homeUrl+"getbaseimageresponse.php/";
+  private _uploadQuestionUrl=this.homeUrl+"uploadquestion.php/";
   private getsSuffix="?id=";
-  private branchGetsSuffix="?branch="
+  private branchGetsSuffix="?branch=";
 
   constructor(private _http:Http) { }
 
@@ -47,6 +48,16 @@ export class IndexService {
     return this._http.get(this._getBaseImageResponse+this.getsSuffix+String(topicId))
       .map((response:Response)=><any> response.json())
       .do(data=>console.log("NextQuestionNumber"+JSON.stringify(data)));
+  }
+
+  /*Insert question to data-base*/
+  uploadQuestionToServer(problem):Observable<any>{
+    let headers = new Headers();
+    headers.append('Content-Type',
+      'application/json');
+    return this._http.post(this._uploadQuestionUrl,JSON.stringify(problem),headers)
+      .map((response:Response)=><any> response.json())
+      .do(data=>console.log("Status of Question Uploaded"+JSON.stringify(data)));
   }
 
 }

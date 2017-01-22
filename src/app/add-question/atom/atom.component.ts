@@ -26,17 +26,20 @@ export class AtomComponent implements OnInit {
 
   uploadFile: any;
   hasBaseDropZoneOver: boolean = false;
-  options: NgUploaderOptions = {
-    url: 'http://www.mistu.org/etutor/uploadimages.php',
-    data:"hello world"
-
-  };
+  options: NgUploaderOptions;
   sizeLimit = 2000000;
 
   constructor() { }
 
   ngOnInit() {
     console.log("Inside Atom: Base Image Url "+this.baseImageUrl);
+    this.options= {
+      url: 'http://www.mistu.org/etutor/uploadimages.php',
+      data:{
+        'path':this.baseImageUrl
+      }
+
+    };
   }
 
   onClickPlus(){
@@ -69,7 +72,8 @@ export class AtomComponent implements OnInit {
     if (data && data.response) {
       data = JSON.parse(data.response);
       this.uploadFile = data;
-      this.atom.text=data['originalName'];
+       this.atom.text=data['originalName'];
+      //this.atom.text=JSON.stringify(data);
     }
   }
 
